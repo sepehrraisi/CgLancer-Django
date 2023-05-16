@@ -224,7 +224,7 @@ h1.heading.pink:after {
   color: #fff;
   border-radius: 5px;
   font-weight: 300;
-  min-height: 400px;
+  height: 500px;
 }
 .testimonial-box h1 {
   font-family: 'Montserrat', sans-serif;
