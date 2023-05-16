@@ -5,6 +5,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=50)
     sub_categories = models.ManyToManyField("self")
+    image = models.ImageField(upload_to="media/gallery/category")
 
     @staticmethod
     def get_all_categories():
@@ -16,5 +17,5 @@ class Category(models.Model):
 
 class Products(models.Model):
     name = models.CharField(max_length=60)
-    price = models.IntegerField(default=0)
     category = models.ManyToManyField(Category)
+    image = models.ImageField(upload_to="media/gallery/products")
