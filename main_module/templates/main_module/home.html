@@ -81,7 +81,21 @@
                         <img src="{{ category.image.url}}" class="client-logo">
                         <h3 class="text-left title">{{ category.name }}</h3>
 {#                        <p class="text-left tag">Branding, UI, Website</p>#}
-                        <p class="text-left"><a href="#">See More &#8594;</a></p>
+{#                        <p class="text-left"><a href="#">See More &#8594;</a></p>#}
+                      </div>
+                   {% endfor %}
+                </div>
+              </div>
+                <hr>
+              <div class="swiper-container client-swiper2">
+                <div class="swiper-wrapper">
+                   {% for product in products%}
+                      <div class="swiper-slide client-box fusion-text">
+                        <img src="{{ product.image.url}}" class="client-logo">
+                        <h3 class="text-left title">{{ product.name }}</h3>
+                        <p class="text-left tag">{% for ctr in product.category.all %}{{ ctr }}<br/>{% endfor %}</p>
+{#                        <p class="text-left tag">Branding, UI, Website</p>#}
+{#                        <p class="text-left"><a href="#">See More &#8594;</a></p>#}
                       </div>
                    {% endfor %}
                 </div>
@@ -201,11 +215,45 @@ All our efforts in this process are to gain your trust in our quality and respon
       <script src="{% static 'js/swiper.jquery.min.js' %}"></script>
       <!-- Initialize Client Swiper -->
       <script>
+      let fusionText = document.querySelectorAll(".fusion-text");
+
+        fusionText.forEach(element => {
+          if (!element.textContent.match(/Category Number 2/)) {
+                 element.style.display = "none";
+          }
+        });
       var swiper1 = new Swiper('.client-swiper', {
         slidesPerView: 3,
         paginationClickable: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
+        spaceBetween: 60,
+        loop: true,
+        // Responsive breakpoints
+        breakpoints: {
+          // when window width is <= 320px
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: '.swiper-pagination'
+          },
+          // when window width is <= 480px
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 20
+          },
+          // when window width is <= 640px
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 30
+          }
+        }
+      });
+           var swiper3 = new Swiper('.client-swiper2', {
+        slidesPerView: 3,
+        paginationClickable: true,
+        nextButton: '.swiper-button-next2',
+        prevButton: '.swiper-button-prev2',
         spaceBetween: 60,
         loop: true,
         // Responsive breakpoints
