@@ -25,7 +25,7 @@ urlpatterns = [
     path('accounts/', include("account_module.urls")),
 #     path('polls/', include("poll_module.urls")),
 #     path('news/', include("news_module.urls")),
-#     path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
