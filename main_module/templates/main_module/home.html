@@ -215,13 +215,49 @@ All our efforts in this process are to gain your trust in our quality and respon
       <script src="{% static 'js/swiper.jquery.min.js' %}"></script>
       <!-- Initialize Client Swiper -->
       <script>
-      let fusionText = document.querySelectorAll(".fusion-text");
 
+      {#const h3Text = cat.innerHTML;#}
+
+  {#    setInterval(function() {#}
+  {#const cat = document.querySelector(".swiper-slide-next h3");#}
+  {#const h3Text = cat.textContent;#}
+  {#document.write(h3Text); // or do whatever you want with the h3Text variable#}
+  {##}
+  {#    let fusionText = document.querySelectorAll(".fusion-text");#}
+  {#      fusionText.forEach(element => {#}
+  {#        if (!element.textContent.match(h3Text)) {#}
+  {#               element.style.display = "none";#}
+  {#        }#}
+  {#        if (element.textContent.match(h3Text)) {#}
+  {#               element.style.display = "show";#}
+  {#        }#}
+  {#      });#}
+  {#      }, 5000);#}
+let specificText = "";
+const specificClass = "swiper-slide-next";
+setInterval(() => {
+  const specificBox = document.querySelector(`.${specificClass} h3`);
+  if (specificBox) {
+    specificText = specificBox.textContent.trim();
+  } else {
+    specificText = "";
+  }
+       let fusionText = document.querySelectorAll(".fusion-text");
         fusionText.forEach(element => {
-          if (!element.textContent.match(/Category Number 2/)) {
+          if (!element.textContent.match(specificText)) {
                  element.style.display = "none";
+              element.style.visibility = "hidden";
+                 element.classList.remove("swiper-slide")
+              element.classList.remove("client-swiper2")
+          }
+          if (element.textContent.match(specificText)) {
+                 element.style.display = "block";
+                 element.style.visibility = "visible";
+                 element.classList.add("swiper-slide")
+              element.classList.add("client-swiper2")
           }
         });
+}, 2500);
       var swiper1 = new Swiper('.client-swiper', {
         slidesPerView: 3,
         paginationClickable: true,
@@ -250,12 +286,13 @@ All our efforts in this process are to gain your trust in our quality and respon
         }
       });
            var swiper3 = new Swiper('.client-swiper2', {
-        slidesPerView: 3,
+        slidesPerView: 4,
         paginationClickable: true,
+               watchOverflow: true,
         nextButton: '.swiper-button-next2',
         prevButton: '.swiper-button-prev2',
         spaceBetween: 60,
-        loop: true,
+        {#loop: true,#}
         // Responsive breakpoints
         breakpoints: {
           // when window width is <= 320px
